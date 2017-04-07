@@ -12,6 +12,8 @@ public class CpuMain {
     System.out.println("Welcome to the awesome CPU program");
     Program program = new Program("00101001", "00001111", "10101010", "MOV B +3");
     
+      System.out.println("Bledededede");
+    
     Machine machine = new Machine();
     machine.load(program);
     machine.print(System.out);
