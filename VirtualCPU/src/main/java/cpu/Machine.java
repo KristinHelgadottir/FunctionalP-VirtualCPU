@@ -76,7 +76,7 @@ public class Machine
     {//NEQ |	F ← A ≠ B; IP++
     }
     else if (instr == 0b0000_1100)
-    {//ALWAYS	F ← true; IP++
+    {// ALWAYS |	F ← true; IP++
     }
     else if (instr == 0b0000_1101)
     {// Undefined
@@ -87,14 +87,16 @@ public class Machine
     else if (instr == 0b0000_1111)
     {//HALT  |	Halts execution
     }
-    else if ((instr & 0b1100_0000) == 0b0100_0000)  
-    { // MOVE value register |  r ← v; IP++
-        int v =(instr & 0b0011_1110) >> 1 ;// the same as deviding by 2
+    else if ((instr & 0b1111_1110) == 0b0001_0000) 
+    {  // PUSH r  |  [--SP] ← r; IP++
         int r = instr & 0b0000_0001;
+        cpu.decSp();
         if (r == Cpu.A){
-            cpu.setA(v);
+            memory.set(cpu.getSp(), cpu.getA());
         }
-        else cpu.setB(v);
+        else{
+            memory.set(cpu.getSp(), cpu.getB());
+        }
         cpu.incIp();
     }
     else if ((instr & 0b1111_1110) == 0b0001_0000) 
@@ -109,8 +111,8 @@ public class Machine
         }
         cpu.incIp();
     }
-     else if ((instr & 0b1111_1110)== 0b0001_0000)
-    {//PUSH r	[--SP] ← r; IP++
+    else if (instr == 0b1111_1110)
+    {// Mov A B
     }
     else if ((instr & 0b1111_1110) == 0b0001_0010) 
     {// POP r  |  r ← [SP++]; IP++
@@ -131,18 +133,26 @@ public class Machine
         cpu.incIp();
     }
     else if ((instr & 0b1111_0000) == 0b0010_0000) 
-    {// MOV r o  |  [SP + o] ← r; IP++  
+    { // MOV r o  |  [SP + o] ← r; IP++  
       int o = instr & 0b0000_0111;
       int r = (instr & 0b0000_1000) >> 3;
-      if (r == cpu.A) 
-      {
+      if (r == cpu.A){
           memory.set(cpu.getSp() + o, cpu.getA());
       }
-      else 
-      {
+      else{ 
           memory.set(cpu.getSp() + o, cpu.getB());
       }
       cpu.incIp();
+    }
+    else if ((instr & 0b1100_0000) == 0b0100_0000)  
+    { // MOVE value register |  r ← v; IP++
+        int v =(instr & 0b0011_1110) >> 1 ;// the same as deviding by 2
+        int r = instr & 0b0000_0001;
+        if (r == Cpu.A){
+            cpu.setA(v);
+        }
+        else cpu.setB(v);
+        cpu.incIp();
     }
 }
   
