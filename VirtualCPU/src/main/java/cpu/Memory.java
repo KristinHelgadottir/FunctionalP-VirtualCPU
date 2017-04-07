@@ -15,7 +15,6 @@ public class Memory {
     }
 
     public void set(int index, int value) {
-        // TODO
         data[index] = (byte) (value & 0b1111_1111);
     }
   
