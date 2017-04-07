@@ -48,44 +48,51 @@ public class Machine
     }
     else if (instr == 0b0000_0101)
     { // NEG |	F ← A < 0; IP++
-        // TODO...
+        if (cpu.getA() < 0) cpu.setFlag();
         cpu.incIp();
     }
     else if (instr == 0b0000_0110)
     { // POS |	F ← A > 0; IP++
-        // TODO...
+        if (cpu.getA() > 0) cpu.setFlag();
         cpu.incIp();
     }
-    else if (instr == 0b0000_0110)
+    else if (instr == 0b0000_0111)
     { // NZERO |    F ← A ≠ 0; IP++
-        // TODO...
+        if (cpu.isFlag() == false)cpu.setFlag(true);
         cpu.incIp();
     }
     else if (instr == 0b0000_1000)
     { // EQ |	F ← A = B; IP++
-        // TODO...
+        if (cpu.isFlag() == true)cpu.setFlag(true);
         cpu.incIp();
     }
     else if (instr == 0b0000_1001)
     {// LT |	F ← A < B; IP++
+        if (cpu.A < cpu.getB()) cpu.setFlag(true);
+        cpu.incIp();
     }
     else if (instr == 0b0000_1010)
-    {// GT |	F ← A > B; IP++
+    { // GT |	F ← A > B; IP++
+        if (cpu.B < cpu.getA()) cpu.setFlag(true);
+        cpu.incIp();
     }
     else if (instr == 0b0000_1011)
-    {//NEQ |	F ← A ≠ B; IP++
+    { //NEQ |	F ← A ≠ B; IP++     
     }
     else if (instr == 0b0000_1100)
-    {// ALWAYS |	F ← true; IP++
+    { // ALWAYS |   F ← true; IP++
+        cpu.incIp();
     }
     else if (instr == 0b0000_1101)
-    {// Undefined
+    { // Undefined
+        cpu.incIp();
     }
     else if (instr == 0b0000_1110)
-    {// Undefined
+    { // Undefined
+        cpu.incIp();
     }
     else if (instr == 0b0000_1111)
-    {//HALT  |	Halts execution
+    { //HALT  |	Halts execution
     }
     else if ((instr & 0b1111_1110) == 0b0001_0000) 
     {  // PUSH r  |  [--SP] ← r; IP++
@@ -113,11 +120,12 @@ public class Machine
     }
     else if (instr == 0b0001_0100)
     { // Mov A B |  B ← A; IP++
-        
+        cpu.setB(cpu.getA());
         cpu.incIp();
     }
      else if (instr == 0b0001_0101)
     { // Mov B A  |  A ← B; IP++
+        cpu.setA(cpu.getB());
         cpu.incIp();
     }
     else if ((instr & 0b1111_0000) == 0b0010_0000) 
@@ -136,7 +144,6 @@ public class Machine
     {// MOV  o r | r ← [SP + o]; IP++
         int o = (instr & 0b0000_1110) >> 1;
         int r = instr & 0b0000_0001;
-        //......
         if (r == cpu.A){
             memory.set(cpu.getSp() + o, cpu.getA());
         }
@@ -146,7 +153,7 @@ public class Machine
         cpu.incIp();
     }
     else if ((instr & 0b1100_0000) == 0b0100_0000)  
-    { // MOVE value register |  r ← v; IP++
+    { // MOV v r |  r ← v; IP++
         int v =(instr & 0b0011_1110) >> 1 ;// the same as deviding by 2
         int r = instr & 0b0000_0001;
         if (r == Cpu.A){
