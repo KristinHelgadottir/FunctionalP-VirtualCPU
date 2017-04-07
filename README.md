@@ -10,15 +10,15 @@ It has taken me two hours to read the code, it is not insanely readable, there a
 
 Working instructions:
 
-NOP
-ADD AB
-MUL AB
-DIV A B
-ZERO
+* NOP
+* ADD AB
+* MUL AB
+* DIV A B
+* ZERO
  
-PUSH r 
-POP r
+* PUSH r 
+* POP r
 
-MOV r o 
-MOV o r 
-MOV v r
+* MOV r o 
+* MOV o r 
+* MOV v r
