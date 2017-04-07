@@ -15,10 +15,12 @@ Working instructions:
 * MUL AB
 * DIV A B
 * ZERO
- 
+* NZERO
+* EQ
 * PUSH r 
 * POP r
-
+* MOV A B
+* MOV B A
 * MOV r o 
 * MOV o r 
 * MOV v r
