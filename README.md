@@ -6,7 +6,7 @@
 
 I implemented as many instructions as I could, but I have started to late on this assignment. 
 The questions I have, cannot be answered in time and there is no help to get at this time.
-It has taken me two hours to read the code, it is not insanely readable, there are many oneliners I have not seen before and do not know what meen. 
+It has taken me two hours to read through the code, it is not insanely readable, there are many oneliners, I have not seen before and do not understand. 
 
 Working instructions:
 
@@ -15,8 +15,11 @@ Working instructions:
 * MUL AB
 * DIV A B
 * ZERO
+* NEG
+* POS
 * NZERO
 * EQ
+* LT
 * PUSH r 
 * POP r
 * MOV A B
