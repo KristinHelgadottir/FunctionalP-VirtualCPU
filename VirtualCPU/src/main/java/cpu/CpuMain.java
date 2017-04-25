@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 
 public class CpuMain {
   
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException 
+  {
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
       
     System.out.println("Welcome to the awesome CPU program");
@@ -20,7 +21,7 @@ public class CpuMain {
     machine.print(System.out);
 
 //   String key = in.readLine();
-//    while(!key.equals("exit")&& machine.isRunning())// need to implement in memmory
+//    while(!key.equals("exit")&& machine.isRunning())  // need to implement in memmory
 //    {
 //        machine.tick();
 //        machine.print(System.out);

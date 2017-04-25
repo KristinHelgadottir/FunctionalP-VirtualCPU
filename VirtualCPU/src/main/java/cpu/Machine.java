@@ -1,6 +1,5 @@
 package cpu;
 
-
 import java.io.PrintStream;
 
 public class Machine 
