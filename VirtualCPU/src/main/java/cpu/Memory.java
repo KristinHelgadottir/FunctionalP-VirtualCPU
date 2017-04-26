@@ -13,11 +13,12 @@ public class Memory {
         return value;
     }
 
-    public void set(int index, int value) {
+    public void set(int index, int value) // hvis jeg kalder memmory.set(addr, bit value)
+    {
         data[index] = (byte) (value & 0b1111_1111);
     }
 
-    public String binary(int value) // 
+    public String binary(int value) // laver int values flottere opsat
     {
         String result = "";
         for (int i = 7; i >= 0; i--) {
@@ -27,7 +28,7 @@ public class Memory {
     }
 
     public void print(PrintStream out, int index) {
-        out.printf("%2d: %4d %s   ", index, get(index), binary(get(index)));
+        out.printf("%2d: %4d [%s]   ", index, get(index), binary(get(index)));
     }
 
     public void print(PrintStream out) {

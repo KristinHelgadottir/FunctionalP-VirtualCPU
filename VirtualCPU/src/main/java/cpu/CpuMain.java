@@ -11,7 +11,9 @@ public class CpuMain {
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
       
     System.out.println("Welcome to the awesome CPU program");
-    Program program = new Program("00101001", "00001111", "10101010", "MOV B +3", "00010001");
+    
+    
+    Program program = new Program("00101001", "00001111", "10101010", "00010000", "00010001");
                                         //41        //15       // 170
     
     Machine machine = new Machine();
