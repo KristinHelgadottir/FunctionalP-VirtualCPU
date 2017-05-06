@@ -10,7 +10,12 @@ public class Program implements Iterable<Integer>
         this.lines = lines;
     }
 
-    public int get(int index) 
+//    Hvis linien starter med 0 eller 1 
+//    går vi ud fra at det er en binær kode (0bxxxx_xxxx) 
+//    og giver bare koden tilbage.
+//    Ellers skal vi oversætte assemblyen til en binær kode 
+//    (eg MOV 2 A -> 0bxxxx-xxxx) først og så returnere det resultat
+     public int getInstruction(int index) 
     {
         String line = lines[index];
 
@@ -45,7 +50,7 @@ public class Program implements Iterable<Integer>
 
         @Override
         public Integer next() {
-            return get(current++);
+            return getInstruction(current++);
         }
     }
 }

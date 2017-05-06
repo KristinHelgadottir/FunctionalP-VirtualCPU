@@ -4,6 +4,7 @@ package cpu;
  *
  * @author Kristin
  */
-public class Instructions {
+public class Instructions 
+{
     
 }

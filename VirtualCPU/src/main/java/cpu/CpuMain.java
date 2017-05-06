@@ -21,7 +21,11 @@ public class CpuMain {
     machine.print(System.out);
     machine.tick();
     machine.print(System.out);
-
+    machine.tick();
+    machine.print(System.out);
+    machine.tick();
+    machine.print(System.out);
+   
 //   String key = in.readLine();
 //    while(!key.equals("exit")&& machine.isRunning())  // need to implement in memmory
 //    {
