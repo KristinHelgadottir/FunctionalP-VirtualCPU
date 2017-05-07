@@ -2,8 +2,8 @@ package cpu;
 
 import java.io.PrintStream;
 
-public class Memory {
-
+public class Memory 
+{
     public static final int SIZE = 64;
     private final byte[] data = new byte[SIZE];
 
@@ -28,8 +28,9 @@ public class Memory {
         return result;
     }
 
-    public void print(PrintStream out, int index) {
-        out.printf("%2d: %4d [%s]   ", index, get(index), binary(get(index)));
+    public void print(PrintStream out, int index) 
+    {
+        out.printf("%2d: %4d [%s]  ", index, get(index), binary(get(index)));
     }
 
     public void print(PrintStream out) {// fancy printing method

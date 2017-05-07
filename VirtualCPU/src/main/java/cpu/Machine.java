@@ -153,7 +153,7 @@ public class Machine
     }
     else if ((instr & 0b1100_0000) == 0b0100_0000)  
     { // MOV v r |  r ← v; IP++
-        int v =(instr & 0b0011_1110) >> 1 ;// the same as deviding by 2
+        int v =(instr & 0b0011_1110) >> 1 ; // the same as deviding by 2
         int r = instr & 0b0000_0001;
         if (r == Cpu.A){
             cpu.setA(v);

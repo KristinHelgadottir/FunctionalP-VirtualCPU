@@ -12,12 +12,12 @@ public class CpuMain
 
         System.out.println("Welcome to the awesome CPU program");
 
-        Program program = new Program("01000011", "00001111", "10101010", "00010000", "00010001");
+        Program program = new Program("01  1", "00010001", "10101010", "00010000", "00010001");
         //41        //15       // 170
 
         Machine machine = new Machine();
         machine.load(program);
-//    machine.print(System.out);
+        machine.print(System.out);
 //    machine.tick();
 //    machine.print(System.out);
 

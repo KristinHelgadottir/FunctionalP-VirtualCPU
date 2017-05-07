@@ -24,10 +24,10 @@ public class Program implements Iterable<Integer>
         {
             return Integer.parseInt(line, 2);
         }
-        else if (line.startsWith(" "))
-        {
-            return index;
-        }
+//        else if (line.startsWith("ALWAYS "))
+//        {
+//            return index;
+//        }
         else if (line.startsWith("MOV ")) 
         {
             String[] parts = line.split(" ");
