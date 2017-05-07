@@ -15,14 +15,19 @@ public class Program implements Iterable<Integer>
 //    og giver bare koden tilbage.
 //    Ellers skal vi oversætte assemblyen til en binær kode 
 //    (eg MOV 2 A -> 0bxxxx-xxxx) først og så returnere det resultat
-     public int getInstruction(int index) 
+    
+    public int getInstruction(int index) 
     {
         String line = lines[index];
 
         if (line.charAt(0) == '0' || line.charAt(0) == '1') 
         {
             return Integer.parseInt(line, 2);
-        } 
+        }
+        else if (line.startsWith(" "))
+        {
+            return index;
+        }
         else if (line.startsWith("MOV ")) 
         {
             String[] parts = line.split(" ");
