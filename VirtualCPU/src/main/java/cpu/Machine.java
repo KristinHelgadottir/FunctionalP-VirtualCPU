@@ -97,10 +97,12 @@ public class Machine
     {  // PUSH r  |  [--SP] ← r; IP++
         int r = instr & 0b0000_0001;
         cpu.decSp();
-        if (r == Cpu.A){
+        if (r == Cpu.A)
+        {
             memory.set(cpu.getSp(), cpu.getA());
         }
-        else{
+        else
+        {
             memory.set(cpu.getSp(), cpu.getB());
         }
         cpu.incIp();
