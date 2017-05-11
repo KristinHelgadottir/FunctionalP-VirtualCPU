@@ -74,8 +74,8 @@ public class Cpu
         out.println("F:  " + flag);
     }
 
-    int setFlag() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    int setFlag() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 }

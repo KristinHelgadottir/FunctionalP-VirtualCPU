@@ -47,12 +47,12 @@ public class Machine
     }
     else if (instr == 0b0000_0101)
     { // NEG |	F ← A < 0; IP++
-        if (cpu.getA() < 0) cpu.setFlag();
+        if (cpu.getA() < 0) cpu.setFlag(true);
         cpu.incIp();
     }
     else if (instr == 0b0000_0110)
     { // POS |	F ← A > 0; IP++
-        if (cpu.getA() > 0) cpu.setFlag();
+        if (cpu.getA() > 0) cpu.setFlag(true);
         cpu.incIp();
     }
     else if (instr == 0b0000_0111)
@@ -80,14 +80,17 @@ public class Machine
     }
     else if (instr == 0b0000_1100)
     { // ALWAYS |   F ← true; IP++
+        cpu.setFlag(true);
         cpu.incIp();
     }
     else if (instr == 0b0000_1101)
     { // Undefined
+        System.out.println("Undefined");
         cpu.incIp();
     }
     else if (instr == 0b0000_1110)
     { // Undefined
+        System.out.println("Undefined");
         cpu.incIp();
     }
     else if (instr == 0b0000_1111)
@@ -161,6 +164,11 @@ public class Machine
             cpu.setA(v);
         }
         else cpu.setB(v);
+        cpu.incIp();
+    }
+    else if ((instr & 0b11000000) == 0b1100_0000)
+    {
+        cpu.getIp();
         cpu.incIp();
     }
 }
