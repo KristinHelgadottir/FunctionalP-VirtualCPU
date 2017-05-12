@@ -85,7 +85,7 @@ public class Machine {
             cpu.incIp();
         }
         else if((instr & 0b1111_1000)== 0b0001_1000){ 
-        // RTN +o
+        // RTN +o   IP <- [SP++];   SP += o;  IP++   0001 1ooo
             int o = (instr & 0b0000_0111);
             // IP <- [sp++]
             cpu.setIp(memory.get(cpu.getSp()));
@@ -113,8 +113,8 @@ public class Machine {
         else if (instr == 0b0000_1111) 
         { //HALT  |	Halts execution
         } 
-        else if ((instr & 0b1111_1110) == 0b0001_0000) 
-        {  // PUSH r  |  [--SP] ← r; IP++
+        else if ((instr & 0b1111_1110) == 0b0001_0000) {  
+        // PUSH r  |  [--SP] ← r; IP++
             int r = instr & 0b0000_0001;
             cpu.decSp();
             if (r == Cpu.A) {
@@ -141,7 +141,8 @@ public class Machine {
         // Mov A B |  B ← A; IP++
             cpu.setB(cpu.getA());
             cpu.incIp();
-        } else if (instr == 0b0001_0101) { 
+        } 
+        else if (instr == 0b0001_0101) { 
         // Mov B A  |  A ← B; IP++
             cpu.setA(cpu.getB());
             cpu.incIp();
@@ -151,13 +152,14 @@ public class Machine {
             cpu.setA(cpu.getA()-1);
             cpu.incIp();
             
-        }else if(instr == 0b0001_0110){
+        }
+        else if(instr == 0b0001_0110){
         // INC
             cpu.setA(cpu.getA() +1);
             cpu.incIp();
         }
         else if ((instr & 0b1111_0000) == 0b0010_0000) { 
-        // MOV r o  |  [SP + o] ← r; IP++  
+        // MOV r o  |  [SP + o] ← r;   IP++  
             int o = instr & 0b0000_0111;
             int r = (instr & 0b0000_1000) >> 3;
             if (r == cpu.A) {
