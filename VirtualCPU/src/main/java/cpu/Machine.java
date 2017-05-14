@@ -87,11 +87,10 @@ public class Machine {
         else if((instr & 0b1111_1000)== 0b0001_1000){ 
         // RTN +o   IP <- [SP++];   SP += o;  IP++   0001 1ooo
             int o = (instr & 0b0000_0111);
-            // IP <- [sp++]
-            cpu.setIp(memory.get(cpu.getSp()));
-            cpu.setSp(cpu.getSp()+1);
-            cpu.setSp(cpu.getSp() + o); //SP +=o
-            cpu.incIp();
+            cpu.setIp(memory.get(cpu.getSp())); // IP <- [sp++] - where to return to
+            cpu.setSp(cpu.getSp() + 1); // SP += 1
+            cpu.setSp(cpu.getSp() + o); // SP += o 
+            cpu.incIp(); 
         }
         else if (instr == 0b0000_1011) { 
         //NEQ |	F ← A ≠ B; IP++     
@@ -113,6 +112,12 @@ public class Machine {
         else if (instr == 0b0000_1111) 
         { //HALT  |	Halts execution
         } 
+        else if(instr == 0b0001_0111){
+        // DEC
+            cpu.setA(cpu.getA()-1);
+            cpu.incIp();
+            
+        }
         else if ((instr & 0b1111_1110) == 0b0001_0000) {  
         // PUSH r  |  [--SP] ← r; IP++
             int r = instr & 0b0000_0001;
@@ -147,25 +152,21 @@ public class Machine {
             cpu.setA(cpu.getB());
             cpu.incIp();
         }
-        else if(instr == 0b0001_0111){
-        // DEC
-            cpu.setA(cpu.getA()-1);
-            cpu.incIp();
-            
-        }
         else if(instr == 0b0001_0110){
         // INC
             cpu.setA(cpu.getA() +1);
             cpu.incIp();
         }
         else if ((instr & 0b1111_0000) == 0b0010_0000) { 
-        // MOV r o  |  [SP + o] ← r;   IP++  
+        // MOV r o  |  [SP + o] ← r;   IP++   0010 rooo
             int o = instr & 0b0000_0111;
             int r = (instr & 0b0000_1000) >> 3;
-            if (r == cpu.A) {
+            if (r == cpu.A) 
+            {
                 memory.set(cpu.getSp() + o, cpu.getA());
             } 
-            else {
+            else 
+            {
                 memory.set(cpu.getSp() + o, cpu.getB());
             }
             cpu.incIp();
@@ -195,7 +196,7 @@ public class Machine {
             cpu.incIp();
         } 
         else if ((instr & 0b1100_0000) == 0b1100_0000) {
-        // CALL 11AAAAAA   11aa aaaa
+        // CALL #a  if F then [--SP] <- IP;  IP <- a else IP++   11aa aaaa
             int a = (instr & 0b0011_1111);
             if (cpu.isFlag()) {
                 cpu.decSp();
@@ -203,10 +204,9 @@ public class Machine {
                 cpu.setIp(a);
             } 
             else cpu.incIp();
-        
         } 
-        else if ((instr & 0b1000_0000) == 0b1000_0000) { 
-        // JMP #a
+        else if ((instr & 0b1100_0000) == 0b1000_0000) { 
+        // JMP #a  if F then IP <- a else IP++   10aa aaaa
             int a = (instr & 0b0011_1111);
 
             if (cpu.isFlag()) {
