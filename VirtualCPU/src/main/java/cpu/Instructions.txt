@@ -1,4 +1,4 @@
-MOV 5 A  
+MOV 5 A  MOV v r
 PUSH A 
 ALWAYS
 CALL FACT
