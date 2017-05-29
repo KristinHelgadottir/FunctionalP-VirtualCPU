@@ -8,22 +8,5 @@ I implemented as many instructions as I could, but I have started to late on thi
 The questions I have, cannot be answered in time and there is no help to get at this time.
 It has taken me two hours to read through the code, it is not insanely readable, there are many oneliners, I have not seen before and do not understand. 
 
-Working instructions:
-
-* NOP
-* ADD AB
-* MUL AB
-* DIV A B
-* ZERO
-* NEG
-* POS
-* NZERO
-* EQ
-* LT
-* PUSH r 
-* POP r
-* MOV A B
-* MOV B A
-* MOV r o 
-* MOV o r 
-* MOV v r
+All the instructions work now, and I have implemented the tail recursive method, hardcoded.
+Takes the factoreal of 5.
